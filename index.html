@@ -323,115 +323,140 @@
       .section h2{ font-size: 24px; }
     }
 
-    /* ===== Modal del juego ===== */
-    .gameModal{
-      position: fixed;
-      inset: 0;
-      background: rgba(11,18,32,.55);
-      display: none;
-      place-items: center;
-      padding: 14px;
-      z-index: 9999;
-    }
-    .gameModal.open{ display:grid; }
+/* ===== Modal del juego ===== */
+.gameModal{
+  position: fixed;
+  inset: 0;
+  background: rgba(11,18,32,.55);
+  display: none;
+  place-items: center;
+  padding: 14px;
+  z-index: 9999;
+}
+.gameModal.open{ display:grid; }
 
-    .gameShell{
-      width: min(980px, 100%);
-      height: min(720px, 92vh);
-      display:flex;
-      flex-direction:column;
-      overflow:hidden;
-      background: #fff;
-    }
+.gameShell{
+  width: min(980px, 100%);
+  height: min(720px, 92vh);
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  background: #fff;
+}
 
-    .gameTop{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-      padding: 12px 12px;
-      border-bottom: 2px solid var(--line);
-      background:
-        radial-gradient(500px 220px at 10% 20%, rgba(121,185,255,.22), transparent 60%),
-        radial-gradient(500px 220px at 90% 20%, rgba(47,126,219,.14), transparent 60%),
-        #fff;
-    }
+.gameTop{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding: 12px 12px;
+  border-bottom: 2px solid var(--line);
+  background:
+    radial-gradient(500px 220px at 10% 20%, rgba(121,185,255,.22), transparent 60%),
+    radial-gradient(500px 220px at 90% 20%, rgba(47,126,219,.14), transparent 60%),
+    #fff;
+}
 
-    /* CENTRADO + canvas fullscreen */
-    .gameBody{
-      position: relative;
-      flex:1;
-      display:grid;
-      place-items:center;
-      padding: 22px;
-      background:
-        radial-gradient(900px 520px at 15% 10%, rgba(121,185,255,.20), transparent 60%),
-        radial-gradient(900px 520px at 85% 18%, rgba(47,126,219,.14), transparent 60%),
-        radial-gradient(820px 520px at 50% 72%, rgba(29,78,216,.10), transparent 62%),
-        #FDFCF8;
-    }
+/* CENTRADO + canvas fullscreen */
+.gameBody{
+  position: relative;
+  flex:1;
+  display:grid;
+  place-items:center;
+  padding: 22px;
+  background:
+    radial-gradient(900px 520px at 15% 10%, rgba(121,185,255,.20), transparent 60%),
+    radial-gradient(900px 520px at 85% 18%, rgba(47,126,219,.14), transparent 60%),
+    radial-gradient(820px 520px at 50% 72%, rgba(29,78,216,.10), transparent 62%),
+    #FDFCF8;
+}
 
-    .gameBody .contenedor{ width: min(560px, 92vw); margin: 0; }
-    .gameBody .envoltura-sobre{
-      background: rgba(121,185,255,.20);
-      border: 2px solid var(--line);
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-      padding: 12px;
-    }
-    .gameBody .carta{
-      background:#fff;
-      border: 2px solid var(--line);
-      border-radius: 16px;
-      padding: 16px;
-    }
-    .gameBody .contenido{
-      color:#111827;
-      font-size: 14px;
-      line-height: 1.55em;
-      max-height: 260px;
-      overflow:auto;
-    }
+.gameBody .contenedor{ width: min(560px, 92vw); margin: 0; }
+.gameBody .envoltura-sobre{
+  background: rgba(121,185,255,.20);
+  border: 2px solid var(--line);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 12px;
+}
+.gameBody .carta{
+  background:#fff;
+  border: 2px solid var(--line);
+  border-radius: 16px;
+  padding: 16px;
+}
+.gameBody .contenido{
+  color:#111827;
+  font-size: 14px;
+  line-height: 1.55em;
+  max-height: 260px;
+  overflow:auto;
+}
 
-    #gameCanvas{
-      display:none;
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      background:#000;
-      z-index: 5;
-    }
+#gameCanvas{
+  display:none;
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  background:#000;
+  z-index: 5;
+}
 
-    /* Controles táctiles */
-    #mobileControls{
-      display:none;
-      position:absolute;
-      left:0; right:0;
-      bottom: 14px;
-      justify-content: space-around;
-      padding: 0 18px;
-      z-index: 30;
-    }
-    #mobileControls button{
-      width: 86px;
-      height: 86px;
-      font-size: 34px;
-      border-radius: 20px;
-      border: 2px solid var(--line);
-      background: rgba(121,185,255,.35);
-      color: var(--ink);
-      font-weight: 900;
-      user-select:none;
-      -webkit-user-select:none;
-      touch-action: manipulation;
-    }
-    #mobileControls button:active{ transform: translateY(1px); }
+/* Controles táctiles */
+#mobileControls{
+  display:none;
+  position:absolute;
+  left:0; right:0;
+  bottom: 14px;
+  justify-content: space-around;
+  padding: 0 18px;
+  z-index: 30;
+}
+#mobileControls button{
+  width: 86px;
+  height: 86px;
+  font-size: 34px;
+  border-radius: 20px;
+  border: 2px solid var(--line);
+  background: rgba(121,185,255,.35);
+  color: var(--ink);
+  font-weight: 900;
+  user-select:none;
+  -webkit-user-select:none;
+  touch-action: manipulation;
+}
+#mobileControls button:active{ transform: translateY(1px); }
 
-    @media (max-width: 520px){
-      .gameShell{ height: 94vh; }
-      #mobileControls button{ width:78px; height:78px; font-size:32px; }
-    }
+/* ===== FIX MOBILE (iPhone) ===== */
+@media (max-width: 520px){
+  /* sin “marco” */
+  .gameModal{ padding: 0; }
+
+  /* pantalla real (Safari) */
+  .gameShell{
+    width: 100%;
+    height: 100dvh;     /* clave */
+    border-radius: 0;   /* opcional pero se ve mejor */
+  }
+
+  /* el intro arriba-centro (no abajo) + safe area */
+  .gameBody{
+    place-items: start center; /* antes center */
+    padding:
+      calc(16px + env(safe-area-inset-top))
+      12px
+      calc(16px + env(safe-area-inset-bottom))
+      12px;
+  }
+
+  /* un poquito más compacto */
+  .gameBody .contenedor{ width: min(520px, 92vw); }
+  .gameBody .contenido{ max-height: 220px; }
+
+  #mobileControls button{ width:78px; height:78px; font-size:32px; }
+}
+
   </style>
 </head>
 
@@ -844,3 +869,4 @@
 
 
       
+
