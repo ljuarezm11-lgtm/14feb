@@ -1,0 +1,850 @@
+```html
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Para Ashly 💙</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --paper:#FBFAF6;
+      --ink:#111827;
+
+      /* Paleta azul (varios azules) */
+      --blue:#2F7EDB;
+      --blue2:#79B9FF;
+      --blue3:#1D4ED8;
+      --blue4:#0EA5E9;
+      --blue5:#93C5FD;
+      --navy:#0B1220;
+
+      --line:#111827;
+      --soft:#6b7280;
+      --card:#ffffff;
+      --shadow: 0 14px 30px rgba(0,0,0,.10);
+      --r: 18px;
+      --gap: 14px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+
+    body{
+      margin:0;
+      background:
+        radial-gradient(900px 520px at 15% 10%, rgba(121,185,255,.26), transparent 60%),
+        radial-gradient(900px 520px at 85% 18%, rgba(47,126,219,.20), transparent 60%),
+        radial-gradient(820px 520px at 50% 72%, rgba(29,78,216,.14), transparent 62%),
+        radial-gradient(760px 500px at 35% 92%, rgba(14,165,233,.12), transparent 60%),
+        #FDFCF8;
+      color: var(--ink);
+      font-family: "Nunito", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    }
+
+    .wrap{ max-width: 980px; margin: 0 auto; padding: 24px 16px 60px; }
+
+    /* Panel comic */
+    .panel{
+      background: var(--card);
+      border: 2px solid var(--line);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow:hidden;
+    }
+
+    /* Botones */
+    .btn{
+      border:2px solid var(--line);
+      background:#fff;
+      border-radius: 14px;
+      padding: 10px 12px;
+      font-weight: 900;
+      text-decoration:none;
+      color: var(--ink);
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      cursor:pointer;
+      transition: transform .15s ease;
+      user-select:none;
+      -webkit-user-select:none;
+      touch-action: manipulation;
+    }
+    .btn:hover{ transform: translateY(-1px); }
+    .btn.primary{ background: rgba(121,185,255,.28); }
+
+    /* TOPBAR */
+    .topbar{
+      display:flex; justify-content:space-between; align-items:center; gap:12px;
+      padding: 14px 16px;
+      flex-wrap: wrap;
+    }
+
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 12px;
+      border: 2px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      font-weight: 900;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing:.6px;
+      white-space: nowrap;
+    }
+    .dot{ width:10px; height:10px; border-radius:99px; background: var(--blue); }
+
+    .badge.val{
+      border-color: var(--line);
+      background: linear-gradient(180deg, rgba(147,197,253,.30), rgba(121,185,255,.18));
+    }
+    .heartDot{
+      width:10px; height:10px; border-radius:99px;
+      background: var(--blue3);
+      box-shadow: 0 0 0 3px rgba(29,78,216,.18);
+    }
+
+    /* HERO GRID */
+    .hero{
+      margin-top: var(--gap);
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: var(--gap);
+      align-items: stretch;
+    }
+    @media (max-width: 860px){
+      .hero{ grid-template-columns:1fr; }
+    }
+
+    /* Reserva espacio para Snoopy en desktop */
+    .hero-left{
+      padding: 18px 18px 16px;
+      min-height: 330px;
+      padding-right: 260px;
+    }
+    .hero-right{
+      padding: 18px;
+      min-height: 330px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .title{
+      font-family: "Patrick Hand", cursive;
+      font-size: 52px;
+      line-height: 1;
+      margin: 10px 0 10px;
+      letter-spacing: .5px;
+    }
+    .title .blue{
+      color: var(--blue);
+      text-decoration: underline;
+      text-decoration-thickness: 6px;
+      text-underline-offset: 6px;
+      text-decoration-color: rgba(147,197,253,.85);
+    }
+
+    .subtitle{
+      margin:0;
+      color: var(--soft);
+      font-size: 15.5px;
+      line-height: 1.65;
+      max-width: 60ch;
+    }
+
+    .sticker{
+      display:inline-flex; align-items:center; gap:8px;
+      font-weight: 900;
+      border:2px solid var(--line);
+      border-radius: 14px;
+      padding: 8px 12px;
+      background:#fff;
+      width: fit-content;
+    }
+
+    /* Snoopy hero img */
+    .snoopy{
+      position:absolute;
+      right: 18px;
+      bottom: -6px;
+      width: 250px;
+      max-width: 38%;
+      filter: drop-shadow(0 12px 18px rgba(0,0,0,.18));
+      user-select:none;
+      pointer-events:none;
+    }
+
+    /* pow */
+    .pow{
+      position:absolute;
+      left: 14px;
+      bottom: 14px;
+      font-family: "Patrick Hand", cursive;
+      font-size: 20px;
+      padding: 8px 12px;
+      border:2px solid var(--line);
+      border-radius: 14px;
+      background:#fff;
+      transform: rotate(-2deg);
+      display:flex; align-items:center; gap:10px;
+    }
+    .pow .valHeart{
+      display:inline-grid; place-items:center;
+      width: 26px; height: 26px;
+      border:2px solid var(--line);
+      border-radius: 10px;
+      background: rgba(121,185,255,.18);
+      color: var(--blue3);
+      font-size: 14px;
+      transform: rotate(2deg);
+    }
+
+    .doodles{
+      position:absolute; inset:0; pointer-events:none; opacity:.95;
+    }
+
+    .mini{
+      border:2px solid var(--line);
+      border-radius: 16px;
+      padding: 12px;
+      background:#fff;
+      position:relative;
+      overflow:hidden;
+    }
+    .mini:before{
+      content:"";
+      position:absolute;
+      inset:auto -40px -40px auto;
+      width:140px; height:140px;
+      background: radial-gradient(circle at 30% 30%, rgba(29,78,216,.18), transparent 55%);
+      transform: rotate(18deg);
+      opacity:.7;
+      pointer-events:none;
+    }
+
+    .mini h3{
+      margin:0;
+      font-weight: 900;
+      font-size: 12px;
+      letter-spacing:.5px;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+    .mini p{
+      margin: 8px 0 0;
+      font-size: 15.5px;
+      line-height: 1.6;
+      font-weight: 800;
+    }
+    .mini .note{
+      color: var(--soft);
+      font-weight: 800;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+
+    .imgrow{ display:flex; gap:10px; align-items:flex-end; flex-wrap:wrap; }
+    .imgrow img{
+      height: 90px;
+      border:2px solid var(--line);
+      border-radius: 14px;
+      background:#fff;
+      padding:6px;
+    }
+
+    .section{ margin-top: var(--gap); padding: 16px; }
+    .section h2{
+      margin: 0 0 10px;
+      font-family:"Patrick Hand", cursive;
+      font-size: 28px;
+      letter-spacing:.2px;
+      display:flex; align-items:center; gap:10px;
+    }
+    .section h2 .tinyHeart{
+      color: var(--blue3);
+      filter: drop-shadow(0 2px 0 rgba(0,0,0,.08));
+    }
+
+    .letter{
+      background:#fff;
+      border:2px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+      font-weight: 800;
+      line-height: 1.75;
+      color: #1f2937;
+    }
+    .letter b{ color: var(--blue); }
+
+    .footer{
+      margin-top: var(--gap);
+      padding: 14px 16px;
+      display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;
+    }
+    .footer small{ color: var(--soft); font-weight:800; }
+    .footer img{ height: 70px; filter: drop-shadow(0 10px 14px rgba(0,0,0,.12)); }
+
+    /* MOBILE */
+    @media (max-width: 520px){
+      .wrap{ padding: 16px 12px 46px; }
+
+      .badge{ font-size: 11px; padding: 7px 10px; }
+      .topbar{ gap:10px; }
+
+      .hero-left,
+      .hero-right{ min-height: unset; }
+
+      .title{ font-size: 40px; }
+      .subtitle{ font-size: 14.5px; }
+
+      .hero-left{ padding-right: 18px; padding-bottom: 14px; }
+
+      .snoopy{
+        position: static;
+        display:block;
+        width: min(240px, 80vw);
+        margin: 12px auto 0;
+      }
+
+      .pow{
+        position: static;
+        transform: none;
+        margin-top: 12px;
+        width: fit-content;
+      }
+
+      .imgrow img{ height: 78px; }
+      .section h2{ font-size: 24px; }
+    }
+
+    /* ===== Modal del juego ===== */
+    .gameModal{
+      position: fixed;
+      inset: 0;
+      background: rgba(11,18,32,.55);
+      display: none;
+      place-items: center;
+      padding: 14px;
+      z-index: 9999;
+    }
+    .gameModal.open{ display:grid; }
+
+    .gameShell{
+      width: min(980px, 100%);
+      height: min(720px, 92vh);
+      display:flex;
+      flex-direction:column;
+      overflow:hidden;
+      background: #fff;
+    }
+
+    .gameTop{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      padding: 12px 12px;
+      border-bottom: 2px solid var(--line);
+      background:
+        radial-gradient(500px 220px at 10% 20%, rgba(121,185,255,.22), transparent 60%),
+        radial-gradient(500px 220px at 90% 20%, rgba(47,126,219,.14), transparent 60%),
+        #fff;
+    }
+
+    /* CENTRADO + canvas fullscreen */
+    .gameBody{
+      position: relative;
+      flex:1;
+      display:grid;
+      place-items:center;
+      padding: 22px;
+      background:
+        radial-gradient(900px 520px at 15% 10%, rgba(121,185,255,.20), transparent 60%),
+        radial-gradient(900px 520px at 85% 18%, rgba(47,126,219,.14), transparent 60%),
+        radial-gradient(820px 520px at 50% 72%, rgba(29,78,216,.10), transparent 62%),
+        #FDFCF8;
+    }
+
+    .gameBody .contenedor{ width: min(560px, 92vw); margin: 0; }
+    .gameBody .envoltura-sobre{
+      background: rgba(121,185,255,.20);
+      border: 2px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 12px;
+    }
+    .gameBody .carta{
+      background:#fff;
+      border: 2px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+    }
+    .gameBody .contenido{
+      color:#111827;
+      font-size: 14px;
+      line-height: 1.55em;
+      max-height: 260px;
+      overflow:auto;
+    }
+
+    #gameCanvas{
+      display:none;
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      background:#000;
+      z-index: 5;
+    }
+
+    /* Controles táctiles */
+    #mobileControls{
+      display:none;
+      position:absolute;
+      left:0; right:0;
+      bottom: 14px;
+      justify-content: space-around;
+      padding: 0 18px;
+      z-index: 30;
+    }
+    #mobileControls button{
+      width: 86px;
+      height: 86px;
+      font-size: 34px;
+      border-radius: 20px;
+      border: 2px solid var(--line);
+      background: rgba(121,185,255,.35);
+      color: var(--ink);
+      font-weight: 900;
+      user-select:none;
+      -webkit-user-select:none;
+      touch-action: manipulation;
+    }
+    #mobileControls button:active{ transform: translateY(1px); }
+
+    @media (max-width: 520px){
+      .gameShell{ height: 94vh; }
+      #mobileControls button{ width:78px; height:78px; font-size:32px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="panel topbar">
+      <div class="badge"><span class="dot"></span> 14 feb 26</div>
+      <div class="badge val"><span class="heartDot"></span> para Ashly</div>
+    </header>
+
+    <section class="hero">
+      <div class="panel hero-left">
+        <svg class="doodles" viewBox="0 0 1000 450" preserveAspectRatio="none" aria-hidden="true">
+          <!-- tulip -->
+          <g opacity=".55" fill="none" stroke="rgba(47,126,219,.55)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M120 120c18-26 40-26 58 0c-20 10-38 10-58 0Z"/>
+            <path d="M149 132c2 45-4 78-18 110"/>
+            <path d="M149 132c2 45 10 78 24 110"/>
+          </g>
+          <!-- lily -->
+          <g opacity=".35" fill="none" stroke="rgba(121,185,255,.55)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M860 90c30 16 30 44 0 60c-18-16-18-44 0-60Z"/>
+            <path d="M860 150c0 55 14 88 32 118"/>
+            <path d="M860 150c0 55-14 88-32 118"/>
+          </g>
+          <!-- gerbera -->
+          <g opacity=".25" stroke="rgba(17,24,39,.55)" stroke-width="2" fill="rgba(121,185,255,.12)">
+            <circle cx="820" cy="345" r="28"/>
+            <circle cx="820" cy="345" r="10" fill="rgba(47,126,219,.18)"/>
+          </g>
+
+          <!-- corazones sutiles, AZULES -->
+          <g opacity=".24" fill="rgba(29,78,216,.18)" stroke="rgba(17,24,39,.30)" stroke-width="2">
+            <path d="M310 90c12-18 36-10 36 10c0 18-20 28-36 42c-16-14-36-24-36-42c0-20 24-28 36-10z"/>
+            <path d="M930 250c10-14 28-8 28 8c0 14-16 22-28 34c-12-12-28-20-28-34c0-16 18-22 28-8z"/>
+            <path d="M120 310c9-13 26-7 26 7c0 13-15 20-26 31c-11-11-26-18-26-31c0-14 17-20 26-7z"/>
+          </g>
+        </svg>
+
+        <div class="sticker">🐾 snoopy edition</div>
+
+        <h1 class="title">Para <span class="blue">Ashly</span></h1>
+        <p class="subtitle">
+          No es para apresurar nada. Solo porque me gusta cómo se siente hablar contigo:
+          <b style="color:var(--blue)">tranquilo</b>, <b style="color:var(--blue)">bonito</b> y <b style="color:var(--blue)">sin presión</b>.
+        </p>
+
+        <div class="pow">
+          <span>happy little thought</span>
+          <span class="valHeart">♥</span>
+        </div>
+
+        <img class="snoopy" src="snoopy-hero.png" alt="Snoopy" />
+      </div>
+
+      <aside class="panel hero-right">
+        <div class="mini">
+          <h3>mini nota</h3>
+          <p>Solo un detalle pequeño. Me pareció bonito hacerlo.</p>
+          <div class="note">Azul, calmado, y Snoopy porque… obvio. 💙</div>
+        </div>
+
+        <div class="mini">
+          <h3>imágenes</h3>
+          <p>Estas 2 hacen que se sienta Peanuts al instante:</p>
+          <div class="imgrow">
+            <img src="woodstock.png" alt="Woodstock (opcional)" />
+            <img src="snoopy-doghouse.png" alt="Casita / escena (opcional)" />
+          </div>
+          <div class="note">Si no tienes Woodstock o la casita, igual funciona.</div>
+        </div>
+
+        <div class="mini">
+          <h3>mood</h3>
+          <p>“Que sea tranquilo.”</p>
+          <div class="note">— esa es la vibra.</div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="juego" class="panel section">
+      <h2>Mini juego <span class="tinyHeart">🐾</span></h2>
+
+      <div class="letter" style="display:flex; flex-direction:column; gap:12px;">
+        <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between;">
+          <div>
+            <div style="font-weight:900;">Snoopy sweet snacks</div>
+            <div style="color:var(--soft); font-weight:800; font-size:14px; margin-top:4px;">
+              Un juego corto, sin presión: atrapa 🍓 y si cae demasiado… gg 🙂
+            </div>
+          </div>
+
+          <button class="btn primary" id="openGameBtn" type="button">🎮 Jugar</button>
+        </div>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <span class="badge" style="text-transform:none; letter-spacing:0;">PC: ⬅️ ➡️</span>
+          <span class="badge" style="text-transform:none; letter-spacing:0;">Móvil: botones táctiles</span>
+          <span class="badge" style="text-transform:none; letter-spacing:0;">Azul mood ✅</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="momentos" class="panel section">
+      <h2>Flores (porque a ti te gustan) <span class="tinyHeart">♥</span></h2>
+      <div class="letter">
+        Lirios para la calma.<br>
+        Tulipanes para lo bonito.<br>
+        Gerberas para lo alegre.<br><br>
+        (Y un Snoopy por si hoy te hace falta una sonrisa.)
+      </div>
+    </section>
+
+    <section id="final" class="panel footer">
+      <small>Si algún día quieres, hago otra versión “noche azul” con más flores 🌙💙</small>
+      <img src="snoopy-sticker.png" alt="Snoopy sticker" />
+    </section>
+  </div>
+
+  <!-- Modal del juego -->
+  <div id="gameModal" class="gameModal" aria-hidden="true">
+    <div class="gameShell panel">
+      <div class="gameTop">
+        <div class="badge"><span class="dot"></span> snoopy game • azul edition</div>
+        <button class="btn" id="closeGameBtn" type="button">✕ Cerrar</button>
+      </div>
+
+      <div class="gameBody">
+        <!-- Intro -->
+        <div id="intro" class="contenedor">
+          <div class="envoltura-sobre">
+            <div class="carta">
+              <div class="contenido">
+                <h2 style="margin:0 0 8px;">Snoopy sweet snacks</h2>
+                <p style="margin:0;">
+                  Reglas:<br>
+                  - <b>PC</b>: mueve a Snoopy con ⬅️ ➡️<br>
+                  - <b>Móvil</b>: usa los botones táctiles ⬅️ ➡️ (aparecen abajo)<br>
+                  - Atrapa 🍓 para puntos<br>
+                  - Atrapa 🍒 para recuperar una vida (máx. 5)<br>
+                  - Si caen 5 frutas, pierdes
+                </p>
+                <p style="text-align:center; margin-top:12px; font-weight:900; color:var(--soft);">
+                  Un mini detalle, versión azul.
+                </p>
+              </div>
+              <button class="btn primary" id="btnStart" type="button">Empezar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Juego -->
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- Controles táctiles -->
+        <div id="mobileControls">
+          <button id="leftBtn" type="button">⬅️</button>
+          <button id="rightBtn" type="button">➡️</button>
+        </div>
+
+        <!-- Game Over overlay -->
+        <div id="gameOver" style="display:none; position:absolute; inset:0; z-index:40; background:rgba(11,18,32,.55); place-items:center;">
+          <div class="panel" style="width:min(520px,92vw); padding:16px; text-align:left;">
+            <div class="badge" style="margin-bottom:10px;"><span class="dot"></span> fin de ronda</div>
+            <div style="font-family:'Patrick Hand',cursive; font-size:30px; margin:4px 0 10px;">Game Over</div>
+            <div style="font-weight:900; margin-bottom:14px;">Puntos: <span id="finalScore">0</span></div>
+
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <button class="btn primary" id="retryBtn" type="button">🔁 Otra ronda</button>
+              <button class="btn" id="closeFromOverBtn" type="button">✕ Cerrar</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ====== Abrir/Cerrar modal ====== */
+    const gameModal = document.getElementById("gameModal");
+    const openGameBtn = document.getElementById("openGameBtn");
+    const closeGameBtn = document.getElementById("closeGameBtn");
+
+    function closeModal(){
+      gameModal.classList.remove("open");
+      gameModal.setAttribute("aria-hidden","true");
+      document.body.style.overflow = "";
+      document.getElementById("gameOver").style.display = "none";
+      stopGame();
+      // vuelve al intro
+      document.getElementById("intro").style.display = "block";
+    }
+
+    openGameBtn.addEventListener("click", () => {
+      gameModal.classList.add("open");
+      gameModal.setAttribute("aria-hidden","false");
+      document.body.style.overflow = "hidden";
+    });
+
+    closeGameBtn.addEventListener("click", closeModal);
+
+    gameModal.addEventListener("click", (e)=>{
+      if(e.target === gameModal) closeModal();
+    });
+
+    /* ====== Juego ====== */
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+
+    function isMobile(){
+      return window.matchMedia("(max-width: 860px)").matches || /Mobi|Android/i.test(navigator.userAgent);
+    }
+
+    const backgroundImg = new Image(); backgroundImg.src = "f1.jpg";
+    const snoopyImg = new Image();     snoopyImg.src = "i1.png";
+    const cherryImg = new Image();     cherryImg.src = "i2.jpeg";
+    const strawberryImg = new Image(); strawberryImg.src = "i3.jpeg";
+
+    let player, foods, keysPressed, score, misses, lastSpawn;
+    let gameStarted = false;
+    let rafId = null;
+
+    const maxFoods = 2, maxMisses = 5;
+    const foodSpeedBase = 3, foodSpeedMax = 8;
+    const spawnIntervalBase = 1000, spawnIntervalMin = 400;
+    let foodSpeed = foodSpeedBase, spawnInterval = spawnIntervalBase;
+
+    function resizeCanvas(){
+      const body = document.querySelector(".gameBody");
+      const rect = body.getBoundingClientRect();
+      canvas.width  = Math.floor(rect.width);
+      canvas.height = Math.floor(rect.height);
+    }
+
+    function setupMobileControls(){
+      const mobileControls = document.getElementById("mobileControls");
+      if(isMobile() && gameStarted){
+        mobileControls.style.display="flex";
+      }else{
+        mobileControls.style.display="none";
+      }
+    }
+
+    function resetGame(){
+      resizeCanvas();
+      const scale = canvas.width / 700;
+
+      let buttonHeight = 0;
+      const mobileControls = document.getElementById("mobileControls");
+      if(isMobile() && mobileControls.style.display !== "none"){
+        buttonHeight = mobileControls.getBoundingClientRect().height || 0;
+      }
+
+      player = {
+        width: 80*scale,
+        height: 80*scale,
+        speed: 10*scale,
+        x: canvas.width/2 - (80*scale)/2,
+        y: canvas.height - buttonHeight - 16 - (80*scale)
+      };
+
+      foods = [];
+      keysPressed = { left:false, right:false };
+      score = 0;
+      misses = 0;
+      lastSpawn = 0;
+    }
+
+    document.addEventListener("keydown", e=>{
+      if(!gameStarted) return;
+      if(e.code==="ArrowLeft") keysPressed.left=true;
+      if(e.code==="ArrowRight") keysPressed.right=true;
+    });
+    document.addEventListener("keyup", e=>{
+      if(!gameStarted) return;
+      if(e.code==="ArrowLeft") keysPressed.left=false;
+      if(e.code==="ArrowRight") keysPressed.right=false;
+    });
+
+    ["leftBtn","rightBtn"].forEach(id=>{
+      const btn = document.getElementById(id);
+      const key = (id==="leftBtn") ? "left" : "right";
+
+      btn.addEventListener("touchstart", e=>{ e.preventDefault(); keysPressed[key]=true; }, {passive:false});
+      btn.addEventListener("touchend",   e=>{ e.preventDefault(); keysPressed[key]=false; }, {passive:false});
+
+      btn.addEventListener("mousedown", ()=>keysPressed[key]=true);
+      btn.addEventListener("mouseup", ()=>keysPressed[key]=false);
+      btn.addEventListener("mouseleave", ()=>keysPressed[key]=false);
+    });
+
+    function collide(a,b){
+      return (a.x < b.x + b.width &&
+              a.x + a.width > b.x &&
+              a.y < b.y + b.height &&
+              a.y + a.height > b.y);
+    }
+
+    function updateDifficulty(){
+      foodSpeed = Math.min(foodSpeedBase + score*0.2, foodSpeedMax);
+      spawnInterval = Math.max(spawnIntervalMin, spawnIntervalBase - score*15);
+    }
+
+    function drawHUD(){
+      const s = canvas.width/700;
+      ctx.textAlign="center";
+      ctx.fillStyle="#111827";
+      ctx.font = `${24*s}px "Nunito", Arial`;
+      ctx.fillText("Snoopy sweet snacks", canvas.width/2, 34*s);
+
+      ctx.textAlign="left";
+      ctx.fillStyle="#111827";
+      ctx.font = `${18*s}px "Nunito", Arial`;
+      ctx.fillText("Puntos: "+score, 10, 62*s);
+      ctx.fillText("Vidas: "+(maxFoods ? (maxMisses-misses) : (maxMisses-misses)), 10, 86*s);
+    }
+
+    function gameLoop(ts){
+      if(!gameStarted) return;
+
+      if(keysPressed.left && player.x>0) player.x -= player.speed;
+      if(keysPressed.right && player.x+player.width<canvas.width) player.x += player.speed;
+
+      updateDifficulty();
+
+      if(!lastSpawn) lastSpawn = ts;
+      if(ts-lastSpawn>spawnInterval && foods.length<maxFoods){
+        const type = Math.random()<0.2 ? {img:cherryImg, life:true} : {img:strawberryImg, life:false};
+        const foodSize = 40*(canvas.width/700);
+
+        foods.push({
+          x: Math.random()*(canvas.width-foodSize),
+          y: -foodSize,
+          width: foodSize,
+          height: foodSize,
+          image: type.img,
+          life: type.life
+        });
+
+        lastSpawn = ts;
+      }
+
+      foods.forEach(f => f.y += foodSpeed);
+      foods = foods.filter(f=>{
+        if(collide(player,f)){
+          score++;
+          if(f.life) misses = Math.max(0, misses-1);
+          return false;
+        }
+        if(f.y>canvas.height){ misses++; return false; }
+        return true;
+      });
+
+      if(misses>=maxMisses){
+        stopGame();
+        document.getElementById("finalScore").textContent = String(score);
+        document.getElementById("gameOver").style.display = "grid";
+        return;
+      }
+
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      if(backgroundImg.complete) ctx.drawImage(backgroundImg,0,0,canvas.width,canvas.height);
+      if(snoopyImg.complete) ctx.drawImage(snoopyImg, player.x, player.y, player.width, player.height);
+      foods.forEach(f => ctx.drawImage(f.image, f.x, f.y, f.width, f.height));
+      drawHUD();
+
+      rafId = requestAnimationFrame(gameLoop);
+    }
+
+    function startGame(){
+      document.getElementById("gameOver").style.display = "none";
+      document.getElementById("intro").style.display = "none";
+      canvas.style.display = "block";
+      gameStarted = true;
+      setupMobileControls();
+      resetGame();
+      rafId = requestAnimationFrame(gameLoop);
+    }
+
+    function stopGame(){
+      gameStarted = false;
+      setupMobileControls();
+      canvas.style.display = "none";
+      if(rafId) cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+
+    document.getElementById("btnStart").addEventListener("click", startGame);
+
+    document.getElementById("retryBtn").addEventListener("click", ()=>{
+      document.getElementById("gameOver").style.display = "none";
+      startGame();
+    });
+
+    document.getElementById("closeFromOverBtn").addEventListener("click", ()=>{
+      document.getElementById("gameOver").style.display = "none";
+      closeModal();
+    });
+
+    window.addEventListener("resize", ()=>{
+      if(gameStarted){
+        setupMobileControls();
+        resetGame();
+      }
+    });
+  </script>
+</body>
+</html>
+```
+
+
+
+
+               
