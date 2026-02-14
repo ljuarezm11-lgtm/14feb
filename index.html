@@ -281,7 +281,53 @@
       color: #1f2937;
     }
     .letter b{ color: var(--blue); }
+ /* ===== Footer: texto + video sin recorte ===== */
+.footer{
+  margin-top: var(--gap);
+  padding: 16px 16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:nowrap;
+}
 
+.footer small{
+  color: var(--soft);
+  font-weight:800;
+  line-height: 1.5;
+  flex: 1;              /* ocupa el espacio */
+  min-width: 0;         /* evita overflow raro en iOS */
+}
+
+/* ===== Video sticker (PC) ===== */
+.snoopyVideo{
+  width: 120px;
+  height: 100px;
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  object-fit: cover;
+  box-shadow: 0 10px 18px rgba(0,0,0,.12);
+  flex: 0 0 auto;       /* no se estira */
+}
+
+/* ===== MÓVIL: centrado y abajo ===== */
+@media (max-width: 520px){
+  .footer{
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .footer small{
+    width: 100%;
+  }
+  .snoopyVideo{
+    width: min(260px, 88vw);
+    height: auto;
+    aspect-ratio: 16/9; /* se ve parejo */
+  }
+}
     .footer{
       margin-top: var(--gap);
       padding: 14px 16px;
@@ -512,12 +558,12 @@
 
       <aside class="panel hero-right">
         <div class="mini">
-          <h3>mini nota</h3>
+          <h3>1</h3>
           <p>Es un detalle pequeño. Me pareció bonito hacertelo.</p>
         </div>
 
         <div class="mini">
-          <h3>imágenes</h3>
+          <h3>2</h3>
           <p>Cosas de snoopy porque te gusta</p>
           <div class="imgrow">
             <img src="woodstock.png" alt="Woodstock (opcional)" />
@@ -527,7 +573,7 @@
         </div>
 
         <div class="mini">
-          <h3>mood</h3>
+          <h3>3</h3>
           <p>“Un beso nomas por hermosaaa”</p>
           <div class="note">— Muaaakkk </div>
         </div>
@@ -559,8 +605,10 @@
     </section>
 
     <section id="final" class="panel footer">
-      <small>También solo para decirte que pidas permiso para vernos el 12 de marzo, ya compré el vuelo para verte jiji. muaakk mi amorr</small>
-      <img src="snoopy-sticker.png" alt="Snoopy sticker" />
+      <small>También solo para decirte que pidas permiso para vernos el 12 de marzo, ya compré el vuelo para verte jiji. <br>muaakk preciosaaa.</small>
+      <video class="snoopyVideo" autoplay muted loop playsinline preload="auto">
+        <source src="snoopy.mp4" type="video/mp4">
+      </video>
     </section>
   </div>
 
@@ -851,4 +899,6 @@
   </script>
 </body>
 </html>
+>
+
 
