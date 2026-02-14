@@ -14,7 +14,7 @@
       --paper:#FBFAF6;
       --ink:#111827;
 
-      /* Paleta azul */
+      /* Paleta azul (varios azules) */
       --blue:#2F7EDB;
       --blue2:#79B9FF;
       --blue3:#1D4ED8;
@@ -194,6 +194,16 @@
       transform: rotate(-2deg);
       display:flex; align-items:center; gap:10px;
     }
+    .pow .valHeart{
+      display:inline-grid; place-items:center;
+      width: 26px; height: 26px;
+      border:2px solid var(--line);
+      border-radius: 10px;
+      background: rgba(121,185,255,.18);
+      color: var(--blue3);
+      font-size: 14px;
+      transform: rotate(2deg);
+    }
 
     .doodles{
       position:absolute; inset:0; pointer-events:none; opacity:.95;
@@ -272,182 +282,181 @@
     }
     .letter b{ color: var(--blue); }
 
- /* ===== Footer: texto + video sin recorte ===== */
-.footer{
-  margin-top: var(--gap);
-  padding: 16px 16px;
+    .footer{
+      margin-top: var(--gap);
+      padding: 14px 16px;
+      display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;
+    }
+    .footer small{ color: var(--soft); font-weight:800; }
+    .footer img{ height: 70px; filter: drop-shadow(0 10px 14px rgba(0,0,0,.12)); }
+
+    /* MOBILE */
+    @media (max-width: 520px){
+      .wrap{ padding: 16px 12px 46px; }
+
+      .badge{ font-size: 11px; padding: 7px 10px; }
+      .topbar{ gap:10px; }
+
+      .hero-left,
+      .hero-right{ min-height: unset; }
+
+      .title{ font-size: 40px; }
+      .subtitle{ font-size: 14.5px; }
+
+      .hero-left{ padding-right: 18px; padding-bottom: 14px; }
+
+      .snoopy{
+        position: static;
+        display:block;
+        width: min(240px, 80vw);
+        margin: 12px auto 0;
+      }
+
+      .pow{
+        position: static;
+        transform: none;
+        margin-top: 12px;
+        width: fit-content;
+      }
+
+      .imgrow img{ height: 78px; }
+      .section h2{ font-size: 24px; }
+    }
+
+/* ===== Modal del juego ===== */
+.gameModal{
+  position: fixed;
+  inset: 0;
+  background: rgba(11,18,32,.55);
+  display: none;
+  place-items: center;
+  padding: 14px;
+  z-index: 9999;
+}
+.gameModal.open{ display:grid; }
+
+.gameShell{
+  width: min(980px, 100%);
+  height: min(720px, 92vh);
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  background: #fff;
+}
+
+.gameTop{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:12px;
-  flex-wrap:nowrap;
+  gap:10px;
+  padding: 12px 12px;
+  border-bottom: 2px solid var(--line);
+  background:
+    radial-gradient(500px 220px at 10% 20%, rgba(121,185,255,.22), transparent 60%),
+    radial-gradient(500px 220px at 90% 20%, rgba(47,126,219,.14), transparent 60%),
+    #fff;
 }
 
-.footer small{
-  color: var(--soft);
-  font-weight:800;
-  line-height: 1.5;
-  flex: 1;              /* ocupa el espacio */
-  min-width: 0;         /* evita overflow raro en iOS */
+/* CENTRADO + canvas fullscreen */
+.gameBody{
+  position: relative;
+  flex:1;
+  display:grid;
+  place-items:center;
+  padding: 22px;
+  background:
+    radial-gradient(900px 520px at 15% 10%, rgba(121,185,255,.20), transparent 60%),
+    radial-gradient(900px 520px at 85% 18%, rgba(47,126,219,.14), transparent 60%),
+    radial-gradient(820px 520px at 50% 72%, rgba(29,78,216,.10), transparent 62%),
+    #FDFCF8;
 }
 
-/* ===== Video sticker (PC) ===== */
-.snoopyVideo{
-  width: 120px;
-  height: 100px;
+.gameBody .contenedor{ width: min(560px, 92vw); margin: 0; }
+.gameBody .envoltura-sobre{
+  background: rgba(121,185,255,.20);
   border: 2px solid var(--line);
-  border-radius: 12px;
-  background: #fff;
-  object-fit: cover;
-  box-shadow: 0 10px 18px rgba(0,0,0,.12);
-  flex: 0 0 auto;       /* no se estira */
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 12px;
+}
+.gameBody .carta{
+  background:#fff;
+  border: 2px solid var(--line);
+  border-radius: 16px;
+  padding: 16px;
+}
+.gameBody .contenido{
+  color:#111827;
+  font-size: 14px;
+  line-height: 1.55em;
+  max-height: 260px;
+  overflow:auto;
 }
 
-/* ===== MÓVIL: centrado y abajo ===== */
+#gameCanvas{
+  display:none;
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  background:#000;
+  z-index: 5;
+}
+
+/* Controles táctiles */
+#mobileControls{
+  display:none;
+  position:absolute;
+  left:0; right:0;
+  bottom: 14px;
+  justify-content: space-around;
+  padding: 0 18px;
+  z-index: 30;
+}
+#mobileControls button{
+  width: 86px;
+  height: 86px;
+  font-size: 34px;
+  border-radius: 20px;
+  border: 2px solid var(--line);
+  background: rgba(121,185,255,.35);
+  color: var(--ink);
+  font-weight: 900;
+  user-select:none;
+  -webkit-user-select:none;
+  touch-action: manipulation;
+}
+#mobileControls button:active{ transform: translateY(1px); }
+
+/* ===== FIX MOBILE (iPhone) ===== */
 @media (max-width: 520px){
-  .footer{
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-  .footer small{
+  /* sin “marco” */
+  .gameModal{ padding: 0; }
+
+  /* pantalla real (Safari) */
+  .gameShell{
     width: 100%;
+    height: 100dvh;     /* clave */
+    border-radius: 0;   /* opcional pero se ve mejor */
   }
-  .snoopyVideo{
-    width: min(260px, 88vw);
-    height: auto;
-    aspect-ratio: 16/9; /* se ve parejo */
+
+  /* el intro arriba-centro (no abajo) + safe area */
+  .gameBody{
+    place-items: start center; /* antes center */
+    padding:
+      calc(16px + env(safe-area-inset-top))
+      12px
+      calc(16px + env(safe-area-inset-bottom))
+      12px;
   }
+
+  /* un poquito más compacto */
+  .gameBody .contenedor{ width: min(520px, 92vw); }
+  .gameBody .contenido{ max-height: 220px; }
+
+  #mobileControls button{ width:78px; height:78px; font-size:32px; }
 }
 
-
-    /* ===== Modal del juego ===== */
-    .gameModal{
-      position: fixed;
-      inset: 0;
-      background: rgba(11,18,32,.55);
-      display: none;
-      place-items: center;
-      padding: 14px;
-      z-index: 9999;
-    }
-    .gameModal.open{ display:grid; }
-
-    .gameShell{
-      width: min(980px, 100%);
-      height: min(720px, 92vh);
-      display:flex;
-      flex-direction:column;
-      overflow:hidden;
-      background: #fff;
-    }
-
-    .gameTop{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-      padding: 12px 12px;
-      border-bottom: 2px solid var(--line);
-      background:
-        radial-gradient(500px 220px at 10% 20%, rgba(121,185,255,.22), transparent 60%),
-        radial-gradient(500px 220px at 90% 20%, rgba(47,126,219,.14), transparent 60%),
-        #fff;
-    }
-
-    .gameBody{
-      position: relative;
-      flex:1;
-      display:grid;
-      place-items:center;
-      padding: 22px;
-      background:
-        radial-gradient(900px 520px at 15% 10%, rgba(121,185,255,.20), transparent 60%),
-        radial-gradient(900px 520px at 85% 18%, rgba(47,126,219,.14), transparent 60%),
-        radial-gradient(820px 520px at 50% 72%, rgba(29,78,216,.10), transparent 62%),
-        #FDFCF8;
-    }
-
-    .gameBody .contenedor{ width: min(560px, 92vw); margin: 0; }
-    .gameBody .envoltura-sobre{
-      background: rgba(121,185,255,.20);
-      border: 2px solid var(--line);
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-      padding: 12px;
-    }
-    .gameBody .carta{
-      background:#fff;
-      border: 2px solid var(--line);
-      border-radius: 16px;
-      padding: 16px;
-    }
-    .gameBody .contenido{
-      color:#111827;
-      font-size: 14px;
-      line-height: 1.55em;
-      max-height: 260px;
-      overflow:auto;
-    }
-
-    #gameCanvas{
-      display:none;
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      background:#000;
-      z-index: 5;
-    }
-
-    #mobileControls{
-      display:none;
-      position:absolute;
-      left:0; right:0;
-      bottom: 14px;
-      justify-content: space-around;
-      padding: 0 18px;
-      z-index: 30;
-    }
-    #mobileControls button{
-      width: 86px;
-      height: 86px;
-      font-size: 34px;
-      border-radius: 20px;
-      border: 2px solid var(--line);
-      background: rgba(121,185,255,.35);
-      color: var(--ink);
-      font-weight: 900;
-      user-select:none;
-      -webkit-user-select:none;
-      touch-action: manipulation;
-    }
-    #mobileControls button:active{ transform: translateY(1px); }
-
-    /* ===== FIX MOBILE (iPhone) ===== */
-    @media (max-width: 520px){
-      .gameModal{ padding: 0; }
-
-      .gameShell{
-        width: 100%;
-        height: 100dvh;
-        border-radius: 0;
-      }
-
-      .gameBody{
-        place-items: start center;
-        padding:
-          calc(16px + env(safe-area-inset-top))
-          12px
-          calc(16px + env(safe-area-inset-bottom))
-          12px;
-      }
-
-      .gameBody .contenedor{ width: min(520px, 92vw); }
-      .gameBody .contenido{ max-height: 220px; }
-
-      #mobileControls button{ width:78px; height:78px; font-size:32px; }
-    }
   </style>
 </head>
 
@@ -461,20 +470,25 @@
     <section class="hero">
       <div class="panel hero-left">
         <svg class="doodles" viewBox="0 0 1000 450" preserveAspectRatio="none" aria-hidden="true">
+          <!-- tulip -->
           <g opacity=".55" fill="none" stroke="rgba(47,126,219,.55)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
             <path d="M120 120c18-26 40-26 58 0c-20 10-38 10-58 0Z"/>
             <path d="M149 132c2 45-4 78-18 110"/>
             <path d="M149 132c2 45 10 78 24 110"/>
           </g>
+          <!-- lily -->
           <g opacity=".35" fill="none" stroke="rgba(121,185,255,.55)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
             <path d="M860 90c30 16 30 44 0 60c-18-16-18-44 0-60Z"/>
             <path d="M860 150c0 55 14 88 32 118"/>
             <path d="M860 150c0 55-14 88-32 118"/>
           </g>
+          <!-- gerbera -->
           <g opacity=".25" stroke="rgba(17,24,39,.55)" stroke-width="2" fill="rgba(121,185,255,.12)">
             <circle cx="820" cy="345" r="28"/>
             <circle cx="820" cy="345" r="10" fill="rgba(47,126,219,.18)"/>
           </g>
+
+          <!-- corazones sutiles, AZULES -->
           <g opacity=".24" fill="rgba(29,78,216,.18)" stroke="rgba(17,24,39,.30)" stroke-width="2">
             <path d="M310 90c12-18 36-10 36 10c0 18-20 28-36 42c-16-14-36-24-36-42c0-20 24-28 36-10z"/>
             <path d="M930 250c10-14 28-8 28 8c0 14-16 22-28 34c-12-12-28-20-28-34c0-16 18-22 28-8z"/>
@@ -486,33 +500,36 @@
 
         <h1 class="title">Para <span class="blue">Ashly</span></h1>
         <p class="subtitle">
-Primero que nada no me veía haciendo estas cosas, luego no quería dejarte sin nada para estas fechas y asi, me gusta mucho pasar tiempo contigo. Intenté que se viera algo lindo pero no se si logré al menos sacarte una sonrisa jeje...
+          Primero que nada no me veía haciendo estas cosas, luego no quería dejarte sin nada para estas fechas y asi, me gusta mucho pasar tiempo contigo. Intenté que se viera algo lindo pero no se si logré al menos sacarte una sonrisa jeje...
         </p>
 
-        <div class="pow"><span>feliz san valentín!</span></div>
+        <div class="pow">
+          <span>feliz san valentín!</span>
+        </div>
+
         <img class="snoopy" src="snoopy-hero.png" alt="Snoopy" />
       </div>
 
       <aside class="panel hero-right">
         <div class="mini">
-          <h3>1</h3>
+          <h3>mini nota</h3>
           <p>Es un detalle pequeño. Me pareció bonito hacertelo.</p>
         </div>
 
         <div class="mini">
-          <h3>2</h3>
-          <p>Cosas de Snoopy porque te gusta</p>
+          <h3>imágenes</h3>
+          <p>Cosas de snoopy porque te gusta</p>
           <div class="imgrow">
             <img src="woodstock.png" alt="Woodstock (opcional)" />
             <img src="snoopy-doghouse.png" alt="Casita / escena (opcional)" />
           </div>
-          <div class="note">Traté de poner algunas cosas azules porque es tu color favorito.</div>
+          <div class="note">Trate de poner algunas cosas azules porque es tu color favorito.</div>
         </div>
 
         <div class="mini">
-          <h3>3</h3>
-          <p>“Un beso nomás por hermosaaa”</p>
-          <div class="note">— Muaaakkk</div>
+          <h3>mood</h3>
+          <p>“Un beso nomas por hermosaaa”</p>
+          <div class="note">— Muaaakkk </div>
         </div>
       </aside>
     </section>
@@ -537,19 +554,13 @@ Primero que nada no me veía haciendo estas cosas, luego no quería dejarte sin 
     <section id="momentos" class="panel section">
       <h2>Flores (porque a ti te gustan) <span class="tinyHeart">💙</span></h2>
       <div class="letter">
-        La verdad tenía planeado darte unas flores pero como tú estabas de viaje,
-        tuve que cambiar la fecha… así que cuando veas esto me dices cuándo te las puedo enviar.
+        La verdad tenía planeado darte unas flores pero como tu estabas de viaje, pues tuve que cambiar la fecha para que te las dieran, así que cuando veas esto me tienes que decir cuando te las puedo enviar y asi.<br>
       </div>
     </section>
 
     <section id="final" class="panel footer">
-      <small>
-También solo para decirte que pidas permiso para vernos el 12 de marzo, ya compré el vuelo para verte jiji. <br>muaakk preciosaa.
-      </small>
-
-      <video class="snoopyVideo" autoplay muted loop playsinline preload="auto">
-        <source src="snoopy.mp4" type="video/mp4">
-      </video>
+      <small>También solo para decirte que pidas permiso para vernos el 12 de marzo, ya compré el vuelo para verte jiji. muaakk mi amorr</small>
+      <img src="snoopy-sticker.png" alt="Snoopy sticker" />
     </section>
   </div>
 
@@ -557,7 +568,7 @@ También solo para decirte que pidas permiso para vernos el 12 de marzo, ya comp
   <div id="gameModal" class="gameModal" aria-hidden="true">
     <div class="gameShell panel">
       <div class="gameTop">
-        <div class="badge"><span class="dot"></span> snoopy game</div>
+        <div class="badge"><span class="dot"></span> juego de snoopy game</div>
         <button class="btn" id="closeGameBtn" type="button">✕ Cerrar</button>
       </div>
 
@@ -595,7 +606,7 @@ También solo para decirte que pidas permiso para vernos el 12 de marzo, ya comp
         <div id="gameOver" style="display:none; position:absolute; inset:0; z-index:40; background:rgba(11,18,32,.55); place-items:center;">
           <div class="panel" style="width:min(520px,92vw); padding:16px; text-align:left;">
             <div class="badge" style="margin-bottom:10px;"><span class="dot"></span> fin de ronda</div>
-            <div style="font-family:'Patrick Hand',cursive; font-size:30px; margin:4px 0 10px;">Game Over</div>
+            <div style="font-family:'Patrick Hand',cursive; font-size:30px; margin:4px 0 10px;">Game Over (QUE MANCAA!!)</div>
             <div style="font-weight:900; margin-bottom:14px;">Puntos: <span id="finalScore">0</span></div>
 
             <div style="display:flex; gap:10px; flex-wrap:wrap;">
@@ -621,6 +632,7 @@ También solo para decirte que pidas permiso para vernos el 12 de marzo, ya comp
       document.body.style.overflow = "";
       document.getElementById("gameOver").style.display = "none";
       stopGame();
+      // vuelve al intro
       document.getElementById("intro").style.display = "block";
     }
 
@@ -631,7 +643,10 @@ También solo para decirte que pidas permiso para vernos el 12 de marzo, ya comp
     });
 
     closeGameBtn.addEventListener("click", closeModal);
-    gameModal.addEventListener("click", (e)=>{ if(e.target === gameModal) closeModal(); });
+
+    gameModal.addEventListener("click", (e)=>{
+      if(e.target === gameModal) closeModal();
+    });
 
     /* ====== Juego ====== */
     const canvas = document.getElementById("gameCanvas");
@@ -742,7 +757,7 @@ También solo para decirte que pidas permiso para vernos el 12 de marzo, ya comp
       ctx.fillStyle="#111827";
       ctx.font = `${18*s}px "Nunito", Arial`;
       ctx.fillText("Puntos: "+score, 10, 62*s);
-      ctx.fillText("Vidas: "+(maxMisses-misses), 10, 86*s);
+      ctx.fillText("Vidas: "+(maxFoods ? (maxMisses-misses) : (maxMisses-misses)), 10, 86*s);
     }
 
     function gameLoop(ts){
@@ -836,3 +851,4 @@ También solo para decirte que pidas permiso para vernos el 12 de marzo, ya comp
   </script>
 </body>
 </html>
+
